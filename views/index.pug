@@ -1,0 +1,12 @@
+extends layout.pug 
+
+block content
+    section#content
+        ul 
+            each exercise in exercises
+                li= exercise 
+        p Need to add an exercise?
+        form(action="/aerials", method="post")
+            label What exercise: 
+                input(type='text', name='exercise')
+            button(type="submit") Add exercise
