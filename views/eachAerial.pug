@@ -1,0 +1,13 @@
+extends layout.pug 
+
+block content
+    section#content
+        h2 Here are the Trapeze Moves: 
+        ul 
+            each trapeze in trapezeMoves
+                li= trapeze 
+        p Need to add a move?
+        form(action="/aerials", method="post")
+            label What exercise: 
+                input(type='text', name='exercise')
+            button(type="submit") Add exercise
