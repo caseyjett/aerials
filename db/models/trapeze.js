@@ -13,10 +13,10 @@ module.exports = (sequelize) => {
             allowNull: false, 
             validate: {
                 notNull: {
-                    msg: 'Please provide a value for "exercise_type"'
+                    msg: 'Please provide a value for "move"'
                 },
                 notEmpty: {
-                    msg: 'Please provide a value for "exercise_type"'
+                    msg: 'Please provide a value for "move"'
                 } 
             }
         }, 
@@ -28,15 +28,6 @@ module.exports = (sequelize) => {
             type: Sequelize.INTEGER,
             allowNull: true, 
         },
-        // exerciseTypeId: {
-        //     type: Sequelize.INTEGER, 
-        //     allowNull: false, 
-        //     validate: {
-        //         notNull: {
-        //             msg: 'Please provide a value for "exerciseTypeId"'
-        //         }
-        //     },
-        // }
     }, {
         freezeTableName: true,  
         sequelize 
