@@ -23,7 +23,7 @@ module.exports = (sequelize) => {
     }, { sequelize }); 
 
     AerialType.associate = (models) => {
-        AerialType.hasMany(models.Trapeze, { 
+        AerialType.hasMany(models.Moves, { 
             foreignKey: {
                 fieldName: 'exerciseTypeId', 
                 allowNull: false,

@@ -16,9 +16,9 @@ const db = {
 };
 
 db.models.AerialType = require('./models/aerials.js')(sequelize); 
-db.models.Trapeze = require('./models/trapeze.js')(sequelize);
+db.models.Moves = require('./models/moves.js')(sequelize);
 db.models.AerialType.associate(db.models);
-db.models.Trapeze.associate(db.models);
+db.models.Moves.associate(db.models);
 
 
 module.exports = db; 

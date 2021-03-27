@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize');
 
 module.exports = (sequelize) => {
-    class Trapeze extends Sequelize.Model {}
-    Trapeze.init({
+    class Moves extends Sequelize.Model {}
+    Moves.init({
         id: {
             type: Sequelize.INTEGER, 
             primaryKey: true, 
@@ -33,8 +33,8 @@ module.exports = (sequelize) => {
         sequelize 
     }); 
 
-    Trapeze.associate = (models) => {
-        Trapeze.belongsTo(models.AerialType, { 
+    Moves.associate = (models) => {
+        Moves.belongsTo(models.AerialType, { 
             foreignKey: {
                 fieldName: 'exerciseTypeId', 
                 allowNull: false,
@@ -44,5 +44,5 @@ module.exports = (sequelize) => {
         });
     }
 
-    return Trapeze; 
+    return Moves; 
 }
