@@ -35,9 +35,12 @@ module.exports = (sequelize) => {
 
     Trapeze.associate = (models) => {
         Trapeze.belongsTo(models.AerialType, { 
-            foreignKey: 'ExerciseTypeId', 
-            onUpdate: 'CASCADE', 
-            onDelete: 'SET NULL'  
+            foreignKey: {
+                fieldName: 'exerciseTypeId', 
+                allowNull: false,
+            },
+            // onUpdate: 'CASCADE', 
+            // onDelete: 'SET NULL'  
         });
     }
 

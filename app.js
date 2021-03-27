@@ -2,41 +2,70 @@ const express = require('express');
 const app = express(); 
 const cookieParser = require('cookie-parser'); 
 
-const db = require('./db'); 
-const { AerialType, Trapeze } = db.models; 
+'use strict'; 
+
+const { sequelize, models } = require('./db')
+// const db = require('./db'); when this was active the function below has await db.sequelize.sync({ force: true })
+const { AerialType, Trapeze } = models; 
+
+// let silks;
+// let staticTrapeze; 
+// let closedGazelle; 
+// let openGazelle; 
 
 (async () => {
-    await db.sequelize.sync({ force: true }); 
+    await sequelize.sync({ force: true }); 
     try{
-        // //Uses Promise.all to create all at once
-        // const aerialInstances = await Promise.all([
-        //     AerialType.create({
-        //         type: 'Trapeze', 
-        //     }), 
-        //     AerialType.create({
-        //         type: 'Silks', 
-        //     })
-        // ]); 
-        // const aerialInstancesJSON = aerialInstances.map(aerialType => aerialType.toJSON()); 
-        // console.log(aerialInstancesJSON); 
+        //Uses Promise.all to create all excercise_types at once
+        const aerialInstances = await Promise.all([
+            AerialType.create({
+                exercise_type: 'Trapeze', 
+            }), 
+            AerialType.create({
+                exercise_type: 'Silks', 
+            })
+        ]); 
+        console.log(JSON.stringify(aerialInstances, null, 2))
+        
+       let [staticTrapeze, silks] = aerialInstances; 
 
-        // //Instances of AerialType classes created individually 
-        const aerial_type = await AerialType.create({
-            exercise_type: 'Trapeze', 
-        }); 
-        // console.log(aerial_type.toJSON()); 
-        const aerial_type2 = await AerialType.create({
-            exercise_type: 'Silks', 
-        }); 
-        // console.log(aerial_type2.toJSON()); 
+        //Use Promise.all to create all moves at once
+        const moveInstances = await Promise.all([
+            Trapeze.create({
+                move: 'closed gazelle', 
+                level: 1, 
+                achieved: false, 
+                exerciseTypeId: staticTrapeze.id,
+            }),
+            Trapeze.create({
+                move: 'open gazelle', 
+                level: 1, 
+                achieved: true,
+                exerciseTypeId: staticTrapeze.id,
+            })
+        ]); 
+        // console.log(JSON.stringify(moveInstances, null, 2)); 
 
-        //New Trapeze record
-        const trapeze_move = await Trapeze.create({
-            move: 'closed gazelle', 
-            level: 1, 
-            achieved: false, 
-        })
-        // console.log(trapeze_move.toJSON())
+        const exercises = await AerialType.findAll({
+            include: [
+                {
+                    model: Trapeze, 
+                }
+            ]
+        }); 
+        console.log(JSON.stringify(exercises, null, 2)); 
+        // console.log(exercises.map(exercise => exercise.get({ plain: true }))); 
+
+        const moves = await Trapeze.findAll({
+            include: [
+                {
+                    model: AerialType, 
+                }, 
+            ], 
+        }); 
+        console.log(moves.map(move => move.get({ plain: true }))); 
+
+        process.exit(); 
 
     }catch (error) {
         if(error.name === 'SequelizeValidationError'){

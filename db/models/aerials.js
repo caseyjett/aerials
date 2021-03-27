@@ -24,9 +24,12 @@ module.exports = (sequelize) => {
 
     AerialType.associate = (models) => {
         AerialType.hasMany(models.Trapeze, { 
-            foreignKey: 'ExerciseTypeId', 
-            onUpdate: 'CASCADE', 
-            onDelete: 'SET NULL' 
+            foreignKey: {
+                fieldName: 'exerciseTypeId', 
+                allowNull: false,
+            }, 
+            // onUpdate: 'CASCADE', 
+            // onDelete: 'SET NULL' 
         }); 
     }
 
