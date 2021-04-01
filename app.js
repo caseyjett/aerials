@@ -11,11 +11,6 @@ const { AerialType, Moves } = models;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// let silks;
-// let staticTrapeze; 
-// let closedGazelle; 
-// let openGazelle; 
-
 (async () => {
     await sequelize.sync({ force: true }); 
     try{
@@ -28,7 +23,7 @@ app.use(express.urlencoded({ extended: false }));
                 exercise_type: 'Silks', 
             })
         ]); 
-        console.log(JSON.stringify(aerialInstances, null, 2))
+        // console.log(JSON.stringify(aerialInstances, null, 2))
         
        let [staticTrapeze, silks] = aerialInstances; 
 
@@ -45,6 +40,12 @@ app.use(express.urlencoded({ extended: false }));
                 level: 1, 
                 achieved: true,
                 exerciseTypeId: staticTrapeze.id,
+            }),
+            Moves.create({
+                move: 'gazelle', 
+                level: 1, 
+                achieved: true,
+                exerciseTypeId: silks.id,
             })
         ]); 
         // console.log(JSON.stringify(moveInstances, null, 2)); 
@@ -56,7 +57,7 @@ app.use(express.urlencoded({ extended: false }));
                 }
             ]
         }); 
-        console.log(JSON.stringify(exercises, null, 2)); 
+        // console.log(JSON.stringify(exercises, null, 2)); 
         // console.log(exercises.map(exercise => exercise.get({ plain: true }))); 
 
         const moves = await Moves.findAll({
@@ -66,7 +67,7 @@ app.use(express.urlencoded({ extended: false }));
                 }, 
             ], 
         }); 
-        console.log(moves.map(move => move.get({ plain: true }))); 
+        // console.log(moves.map(move => move.get({ plain: true }))); 
 
         // process.exit(); 
 
@@ -88,3 +89,5 @@ const routes = require('./routes');
 app.use(routes); 
 
 app.listen(3000, () => console.log('Aerials API listening on Port 3000')); 
+
+module.exports = app; 
