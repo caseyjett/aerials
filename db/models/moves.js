@@ -39,7 +39,7 @@ module.exports = (sequelize) => {
                 fieldName: 'exerciseTypeId', 
                 allowNull: false,
             },
-            // onUpdate: 'CASCADE', 
+            onUpdate: 'CASCADE', 
             // onDelete: 'SET NULL'  
         });
     }

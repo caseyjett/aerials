@@ -7,7 +7,18 @@ block content
             each trapeze in aerialMoves
                 li= trapeze 
         //- p Need to add a move?
-        //- form(action="/aerials", method="post")
-        //-     label What exercise: 
-        //-         input(type='text', name='exercise_type')
-        //-     button(type="submit") Add exercise
+        //- form(action="/aerials/:id", method="post")
+        //-     input(type="hidden" name="exerciseTypeId" value="#{moveId}")
+        //-     label The missing move: 
+        //-         input(type='text', name='move')
+        //-     br
+        //-     label Level: 
+        //-         input(type='number', name='level')
+        //-     br
+        //-     label Achieved: 
+        //-         input(type='radio', name='achieved', value="true", id="true")
+        //-         label(for="true") True
+        //-         input(type='radio', name='achieved', value="false", id="false")
+        //-         label(for="false") False
+        //-     br
+        //-     button(type="submit") Add Move

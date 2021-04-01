@@ -34,9 +34,8 @@ router.get('/aerials/:id', asyncHandler(async (req, res) => {
         id: req.params.id
     }
   })
-  // console.log(theName)
   const theName = exerciseName.exercise_type; 
-  console.log(theName); 
+  // console.log(theName); 
 
   //Find the aerialType by its id and add it to the render variables
   const exerciseList = await Moves.findAll({
@@ -44,11 +43,16 @@ router.get('/aerials/:id', asyncHandler(async (req, res) => {
       exerciseTypeId: req.params.id} 
     }); 
   const aerialMoves = exerciseList.map(move => move.move)
-  res.render('eachAerial', { aerialMoves, exerciseName })
+  res.render('eachAerial', { aerialMoves, theName })
 })); 
 
 //Send a POST request to /aerials/:id to CREATE an individual move to the exercise type 
-
+// router.post('/aerials/:id', asyncHandler(async (req, res) => {
+//   console.log(req.body);  
+//   const moveId = req.params.id; 
+//   const newMoves = await Moves.create(req.body); 
+//   res.render(`/aerials/${exerciseType.id}`, {moveId})
+// })); 
 
 //Send a POST request to /aerials to CREATE a new exercise type
 router.post('/aerials', asyncHandler(async (req, res) => {

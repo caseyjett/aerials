@@ -22,7 +22,7 @@ describe('Routes: ', () => {
                     const exercises = exerciseList.map(exercises => exercises.exercise_type)
                     // console.log(exercises); 
                     // console.log(exercisesList)
-                    assert(exercises.some(substring=>res.text.includes(substring))); 
+                    assert(exercises.every(substring=>res.text.includes(substring))); 
                 })
         }); 
     }); 
@@ -40,7 +40,8 @@ describe('Routes: ', () => {
                     }); 
                     const aerialMoves = exerciseList.map(move => move.move)
                     // console.log(aerialMoves); 
-                    assert(aerialMoves.some(substring=>res.text.includes(substring)))
+                    // assert(aerialMoves.some(substring=>res.text.includes(substring)))
+                    assert(aerialMoves.every(substring=>res.text.includes(substring)))
                 })
         }); 
     }); 

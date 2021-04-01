@@ -17,15 +17,21 @@ app.use(express.urlencoded({ extended: false }));
         //Uses Promise.all to create all excercise_types at once
         const aerialInstances = await Promise.all([
             AerialType.create({
+                exercise_type: 'Warm-ups', 
+            }),
+            AerialType.create({
                 exercise_type: 'Trapeze', 
             }), 
             AerialType.create({
                 exercise_type: 'Silks', 
+            }),
+            AerialType.create({
+                exercise_type: 'Conditioning', 
             })
         ]); 
         // console.log(JSON.stringify(aerialInstances, null, 2))
         
-       let [staticTrapeze, silks] = aerialInstances; 
+       let [warmups, staticTrapeze, silks, conditioning] = aerialInstances; 
 
         //Use Promise.all to create all moves at once
         const moveInstances = await Promise.all([
@@ -42,11 +48,65 @@ app.use(express.urlencoded({ extended: false }));
                 exerciseTypeId: staticTrapeze.id,
             }),
             Moves.create({
+                move: 'arabesque', 
+                level: 1, 
+                achieved: true,
+                exerciseTypeId: staticTrapeze.id,
+            }),
+            Moves.create({
+                move: 'archers pose', 
+                level: 1, 
+                achieved: true,
+                exerciseTypeId: staticTrapeze.id,
+            }),
+            Moves.create({
+                move: 'figure eight footlock', 
+                level: 1, 
+                achieved: true,
+                exerciseTypeId: silks.id,
+            }),
+            Moves.create({
                 move: 'gazelle', 
                 level: 1, 
                 achieved: true,
                 exerciseTypeId: silks.id,
-            })
+            }),
+            Moves.create({
+                move: 'rebecca split', 
+                level: 1, 
+                achieved: true,
+                exerciseTypeId: silks.id,
+            }),
+            Moves.create({
+                move: 'bears', 
+                level: 0, 
+                achieved: true,
+                exerciseTypeId: warmups.id,
+            }),
+            Moves.create({
+                move: 'backwards bears', 
+                level: 0, 
+                achieved: true,
+                exerciseTypeId: warmups.id,
+            }),
+            Moves.create({
+                move: 'inchworm', 
+                level: 0, 
+                achieved: true,
+                exerciseTypeId: warmups.id,
+            }),
+            Moves.create({
+                move: 'pike pull-ups', 
+                level: 1, 
+                achieved: false,
+                exerciseTypeId: conditioning.id,
+            }),
+            Moves.create({
+                move: 'pullover pull-ups', 
+                level: 1, 
+                achieved: false,
+                exerciseTypeId: conditioning.id,
+            }),            
         ]); 
         // console.log(JSON.stringify(moveInstances, null, 2)); 
 
