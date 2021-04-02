@@ -27,7 +27,7 @@ describe('Routes: ', () => {
         }); 
     }); 
 
-    describe('#GET /aerials/id', () => {
+    describe('#GET /aerials/:id', () => {
         it('Should list the moves for a specific exercise type', () => {
             return request(app)
                 .get('/aerials/1')
@@ -56,6 +56,27 @@ describe('Routes: ', () => {
                     const exerciseList = await AerialType.findAll(); 
                     const exercises = exerciseList.map(exercises => exercises.exercise_type)
                     assert(exercises.includes("Bouldering")); 
+                })
+                
+               
+        }); 
+    }); 
+
+    describe('#POST /aerials/:id', () => {
+        it('should add a move to the given exercise', () => {
+            return request(app)
+                .post('/aerials/1')
+                .send({ 
+                    "move": "Party Penguins", 
+                    "level": 1, 
+                    "achieved": true, 
+                    "exerciseTypeId": 1
+                })
+                .expect(302) //Since it "redirects" you to this page with the new exercise added
+                .then( async (res) => {
+                    const exerciseList = await Moves.findAll(); 
+                    const aerialMoves = exerciseList.map(move => move.move)
+                    assert(aerialMoves.includes("Party Penguins")); 
                 })
                 
                

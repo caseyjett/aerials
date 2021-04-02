@@ -8,16 +8,17 @@ Run `npm start` to run the program. View in the browers at the given endpoints
 Run `npm run test` to run the unit tests.
 
 ### Endpoints
-| Endpoint               | Description                                      | Method |
-| ---------------------- | ------------------------------------------------ | ------ |
-| '/aerials'             | Reads list of exercise types                     | GET    |
-| '/aeriels'             | Creates a new exercise type                      | POST   |
-| '/aerials/:id'         | Reads the moves for a specific exercise type     | GET    |
+| Endpoint               | Description                                        | Method |
+| ---------------------- | -------------------------------------------------- | ------ |
+| '/aerials'             | Reads list of exercise types                       | GET    |
+| '/aeriels'             | Creates a new exercise type                        | POST   |
+| '/aerials/:id'         | Reads the moves for a specific exercise type       | GET    |
+| '/aeriels/:id'         | Creates a new move for a specific exercise type    | POST   |
 
 ### Features
 - Read and create exercises/moves with api routes
 - Data rendered using PUG 
-- Uses SQLite and Sequelizer
+- Uses SQLite and Sequelize
 
 ### Next Steps: 
 - Routes for the reading and updating individual exercise moves details.

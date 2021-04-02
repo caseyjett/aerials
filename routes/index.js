@@ -43,16 +43,13 @@ router.get('/aerials/:id', asyncHandler(async (req, res) => {
       exerciseTypeId: req.params.id} 
     }); 
   const aerialMoves = exerciseList.map(move => move.move)
-  res.render('eachAerial', { aerialMoves, theName })
-})); 
 
-//Send a POST request to /aerials/:id to CREATE an individual move to the exercise type 
-// router.post('/aerials/:id', asyncHandler(async (req, res) => {
-//   console.log(req.body);  
-//   const moveId = req.params.id; 
-//   const newMoves = await Moves.create(req.body); 
-//   res.render(`/aerials/${exerciseType.id}`, {moveId})
-// })); 
+  //Set the exerciseTypeId so that when a move is added the exerciseTypeId field is already set
+  const setExerciseId = exerciseName.id 
+  // console.log(setExerciseId); 
+
+  res.render('eachAerial', { aerialMoves, theName, setExerciseId })
+})); 
 
 //Send a POST request to /aerials to CREATE a new exercise type
 router.post('/aerials', asyncHandler(async (req, res) => {
@@ -61,13 +58,17 @@ router.post('/aerials', asyncHandler(async (req, res) => {
   res.redirect(`/aerials/${exerciseType.id}`)
 })); 
 
-
-
-
-
+//Send a POST request to /aerials/:id to CREATE an individual move to the exercise type 
+router.post('/aerials/:id', asyncHandler(async (req, res, next) => {
+  const pageId = req.body.exerciseTypeId; 
+  const newMoves = await Moves.create(req.body); 
+  // console.log(newMoves);
+  res.redirect(`/aerials/${pageId}`)
+})); 
 
 
 //SECOND PRIORITY
+
 //Send a PUT request to /aerials to UPDATE(edit) an exercise move
 
 //Send a GET request to /aerials/{$exercise}/:id to READ(view) a the details of a specific exercise move 
