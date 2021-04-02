@@ -2,10 +2,10 @@
 An API server for keeping track of various aerial exercises and the moves for each exercise type. 
 
 ### To Run: 
-Use Node version 10.23.3
-Download or clone project files and then run `npm install` to install the required dependencies. 
-Run `npm start` to run the program. View in the browers at the given endpoints
-Run `npm run test` to run the unit tests.
+- Use Node version 10.23.3
+- Download or clone project files and then run `npm install` to install the required dependencies. 
+- Run `npm start` to run the program. View in the brower at the given endpoints
+- Run `npm run test` to run the unit tests.
 
 ### Endpoints
 | Endpoint               | Description                                        | Method |
